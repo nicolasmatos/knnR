@@ -159,7 +159,7 @@ processaKnn <- function(classe1, classe2, classe3) {
   return (resultado)
 }
 
-processaKnn2 <- function(dataset) {
+processaKnn2 <- function(classe1, classe2, classe3) {
   txMedAcertos<-c()
   testes<-c()
   
@@ -170,12 +170,23 @@ processaKnn2 <- function(dataset) {
     #Laço para rodar 30vezes a base de teste
     for (j in 1:30) {
       #Embaralhando a base original
-      dataset <- dataset[sample(1:nrow(dataset)), ]
+      classe1 <- classe1[sample(1:nrow(classe1)), ]
+      classe2 <- classe2[sample(1:nrow(classe2)), ]
+      classe3 <- classe3[sample(1:nrow(classe3)), ]
       
       #Quebrando o dataset em treino e teste (80/20) OBS: Buscando as linhas de forma aleotória
       library(dplyr)
-      dataTreino<-sample_frac(dataset, (0.19 + (k/100)))
-      dataTeste<-setdiff(dataset, dataTreino)
+      dataTreinoClasse1<-sample_frac(classe1, (0.19 + (k/100)))
+      dataTesteClasse1<-setdiff(classe1, dataTreinoClasse1)
+      
+      dataTreinoClasse2<-sample_frac(classe2, (0.19 + (k/100)))
+      dataTesteClasse2<-setdiff(classe2, dataTreinoClasse2)
+      
+      dataTreinoClasse3<-sample_frac(classe3, (0.19 + (k/100)))
+      dataTesteClasse3<-setdiff(classe3, dataTreinoClasse3)
+      
+      dataTreino <- rbind(dataTreinoClasse1, dataTreinoClasse2, dataTreinoClasse3)
+      dataTeste <- rbind(dataTesteClasse1, dataTesteClasse2, dataTesteClasse3)
       
       #Variável para controlar os acertos do algoritmo
       qntAcertosTotal = 0
