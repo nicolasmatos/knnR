@@ -42,7 +42,7 @@ knn <- function(treinamento, k, e) {
   return (ret)
 }
 
-processaKnn <- function(classe1, classe2, classe3) {
+processaKnn <- function(classe1, classe2, classe3, n) {
   txAcertos<-c()
   txAcertosUm<-c()
   txAcertosDois<-c()
@@ -86,7 +86,7 @@ processaKnn <- function(classe1, classe2, classe3) {
       linha = dataTeste[i,]
 
       #Chamando a função que classifica a linha atual
-      resultKnn = knn(dataTreino, 1, linha)
+      resultKnn = knn(dataTreino, n, linha)
       
       #return(resultKnn)
       
@@ -159,7 +159,7 @@ processaKnn <- function(classe1, classe2, classe3) {
   return (resultado)
 }
 
-processaKnn2 <- function(classe1, classe2, classe3) {
+processaKnn2 <- function(classe1, classe2, classe3, n) {
   txMedAcertos<-c()
   testes<-c()
   
@@ -197,7 +197,7 @@ processaKnn2 <- function(classe1, classe2, classe3) {
         linha = dataTeste[i,]
         
         #Chamando a função que classifica a linha atual
-        resultKnn = knn(dataTreino, 1, linha)
+        resultKnn = knn(dataTreino, n, linha)
         
         #Verificando se o algoritmo acertou na classificação
         if (resultKnn$acertou) {
